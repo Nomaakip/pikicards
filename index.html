@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            font-family: "ＭＳ Pゴシック", "MS PGothic", sans-serif;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .avatar-small {
+            box-sizing: border-box;
+            border: 1px solid #CCC;
+            padding: 2px;
+            background-clip: content-box;
+            width: 61px;
+            height: 61px;
+            z-index: 2;
+            position: relative;
+        }
+
+        #follow-button {
+            background: linear-gradient(180deg, rgba(254, 254, 209, 1), rgba(239, 197, 44, 1));
+            height: 100%;
+            border: #EFCD56 1px solid;
+            border-radius: 2px;
+        }
+
+        #follow-link {
+            color: #906219;
+        }
+
+        #cardContainer {
+            display: flex;
+            flex-direction: column;
+            background: black;
+            border-radius: 8px;
+            padding: 8px;
+            gap: 8px;
+        }
+
+        #userContainer {
+            display: flex;
+            gap: 5px;
+            border-radius: 8px;
+            padding: 5px;
+        }
+
+        #cardMain {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .post-content {
+            background: #333;
+            color: white;
+            width: 100%;
+            padding: 5px;
+        }
+
+        .post {
+            display: flex;
+            gap: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="cardContainer">
+        <!-- user stuff!! -->
+        <div id="userContainer">
+            <img src="https://pikidiary.lol/uploads/avatars/resized-1746850786028.jpg" alt="pfp" class="avatar-small" id="avatar">
+            <div id="cardMain">
+                <b id="username-text"></b>
+                <div id="userInfo">
+
+                </div>
+                <button id="follow-button"><a id="follow-link">Follow</a></button>
+            </div>
+        </div>
+        <!-- posts!! -->
+         <div id="postsContainer">
+                <div class="post">
+                    <img src="https://pikidiary.lol/uploads/avatars/resized-1746850786028.jpg" alt="pfp" class="avatar-small">
+                    <div class="post-content" style="display: flex;flex-direction: column;overflow: hidden;">ok</div>
+                </div>
+         </div>
+    </div>
+    <script src="index.js"></script>
+</body>
+
+</html>
