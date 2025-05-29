@@ -53,15 +53,18 @@ function displayCard(data) {
 
 function displayPosts(data) {
 
-    /*
-    const post = document.createElement('div');
-    post.innerHTML = `<div class="post">
-                    <img src="https://pikidiary.lol/uploads/avatars/resized-1746850786028.jpg" alt="pfp" class="avatar-small">
-                    <div class="post-content" style="display: flex;flex-direction: column;overflow: hidden;">ok</div>
+    data.posts.forEach((post) => {
+        const postDiv = document.createElement('div');
+        postDiv.innerHTML = `<div class="post">
+                    <img src="${userAvatar.src}" alt="pfp" class="avatar-small">
+                    <div class="post-header">
+                    <b>${post.author}</b>
+                    <div class="post-content" style="display: flex;flex-direction: column;overflow: hidden;border-radius:2px;">${post.content}</div>
+                    </div>
                 </div>`;
 
-    postsContainer.appendChild(post);
-    */
+        postsContainer.appendChild(postDiv);
+    });
 }
 
 getUserInfo();

@@ -14,6 +14,10 @@
             text-decoration: none;
         }
 
+        b {
+            color: white;
+        }
+
         .avatar-small {
             box-sizing: border-box;
             border: 1px solid #CCC;
@@ -41,7 +45,7 @@
             flex-direction: column;
             background: black;
             border-radius: 8px;
-            padding: 8px;
+            padding: 10px;
             gap: 8px;
         }
 
@@ -58,10 +62,16 @@
             gap: 5px;
         }
 
+        #postsContainer {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
         .post-content {
             background: #333;
             color: white;
-            width: 100%;
+            width: 99%;
             padding: 5px;
         }
 
@@ -69,14 +79,23 @@
             display: flex;
             gap: 5px;
         }
+
+        .post-header {
+            display: flex;
+            flex-direction: column;
+            width: 99%;
+            gap: 2px;
+        }
     </style>
 </head>
 
 <body>
+    <h1>BETA!!!!! i need to add a lot of stuff.. and also fix stuff LMAO</h1>
     <div id="cardContainer">
         <!-- user stuff!! -->
         <div id="userContainer">
-            <img src="https://pikidiary.lol/uploads/avatars/resized-1746850786028.jpg" alt="pfp" class="avatar-small" id="avatar">
+            <img src="https://pikidiary.lol/uploads/avatars/resized-1746850786028.jpg" alt="pfp" class="avatar-small"
+                id="avatar">
             <div id="cardMain">
                 <b id="username-text"></b>
                 <div id="userInfo">
@@ -86,12 +105,7 @@
             </div>
         </div>
         <!-- posts!! -->
-         <div id="postsContainer">
-                <div class="post">
-                    <img src="https://pikidiary.lol/uploads/avatars/resized-1746850786028.jpg" alt="pfp" class="avatar-small">
-                    <div class="post-content" style="display: flex;flex-direction: column;overflow: hidden;">ok</div>
-                </div>
-         </div>
+        <div id="postsContainer"></div>
     </div>
     <script src="index.js"></script>
 </body>
