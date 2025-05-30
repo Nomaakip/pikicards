@@ -45,7 +45,18 @@ function displayCard(data) {
     userAvatar.src = data.pfp;
 
     followLink.href = `https://pikidiary.lol/@${data.username}`;
-    userContainer.style.background = data.banner ? `url(${data.banner})` : background;
+
+    if (searchParams.get("bg") == 'userBackground') {
+        userContainer.style.background = data.background ? `url(${data.background})` : background;
+    }
+
+    else {
+        userContainer.style.background = data.banner ? `url(${data.banner})` : background;
+    }
+
+    userContainer.style.backgroundRepeat = 'no-repeat';
+    userContainer.style.backgroundSize = 'cover'; 
+    userContainer.style.backgroundPosition = 'center'; 
 
     addBadge(usernameText, data.badges);
     displayPosts(data);
