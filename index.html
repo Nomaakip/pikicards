@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>pkicards</title>
+    <title>Document</title>
     <style>
         * {
             font-family: "ＭＳ Pゴシック", "MS PGothic", sans-serif;
@@ -41,6 +41,7 @@
         }
 
         #cardContainer {
+            max-width: 500px;
             display: flex;
             flex-direction: column;
             background: black;
@@ -55,6 +56,7 @@
             gap: 5px;
             border-radius: 8px;
             padding: 5px;
+            box-shadow: 0 0 5px black;
         }
 
         #cardMain {
@@ -72,8 +74,9 @@
         .post-content {
             background: #333;
             color: white;
-            width: 99%;
+            width: 95%;
             padding: 5px;
+            gap: 5px;
         }
 
         .post {
@@ -84,8 +87,15 @@
         .post-header {
             display: flex;
             flex-direction: column;
-            width: 99%;
+            width: 95%;
             gap: 2px;
+        }
+
+        .post-content img,
+        .post-content video {
+            border: 1px #CCC solid;
+            padding: 2px;
+            object-fit: contain;
         }
     </style>
 </head>
@@ -94,7 +104,8 @@
     <div id="cardContainer">
         <!-- user stuff!! -->
         <div id="userContainer">
-            <img src="https://pikidiary.lol/uploads/avatars/resized-1746850786028.jpg" alt="pfp" class="avatar-small" id="avatar">
+            <img src="https://pikidiary.lol/uploads/avatars/resized-1746850786028.jpg" alt="pfp" class="avatar-small"
+                id="avatar">
             <div id="cardMain">
                 <b id="username-text"></b>
                 <div id="userInfo"></div>

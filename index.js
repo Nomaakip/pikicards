@@ -11,6 +11,9 @@ const followLink = document.querySelector('#follow-link');
 const username = searchParams.get("username") || 'No username...';
 
 let background = searchParams.has("bg") ? `#${searchParams.get("bg")}` : 'pink';
+let showPosts = searchParams.has("showPosts") ? searchParams.get("showPosts") == 'true' : true;
+
+
 
 function addBadge(usernameSpan, badges) {
     badges.forEach((badge) => {
@@ -55,27 +58,74 @@ function displayCard(data) {
     }
 
     userContainer.style.backgroundRepeat = 'no-repeat';
-    userContainer.style.backgroundSize = 'cover'; 
-    userContainer.style.backgroundPosition = 'center'; 
+    userContainer.style.backgroundSize = 'cover';
+    userContainer.style.backgroundPosition = 'center';
 
     addBadge(usernameText, data.badges);
     displayPosts(data);
 }
 
 function displayPosts(data) {
-
+    if (!showPosts) {
+        cardContainer.style.background = 'none';
+        return;
+    }
+    
     data.posts.forEach((post) => {
         const postDiv = document.createElement('div');
-        postDiv.innerHTML = `<div class="post">
-                    <img src="${userAvatar.src}" alt="pfp" class="avatar-small">
-                    <div class="post-header">
-                    <b>${post.author}</b>
-                    <div class="post-content" style="display: flex;flex-direction: column;overflow: hidden;border-radius:2px;">${post.content}</div>
-                    </div>
-                </div>`;
+        postDiv.classList.add('post');
+
+        const avatar = document.createElement('img');
+        avatar.src = userAvatar.src;
+        avatar.alt = "pfp";
+        avatar.className = "avatar-small";
+
+        const postHeader = document.createElement('div');
+        postHeader.className = "post-header";
+
+        const authorEl = document.createElement('b');
+        authorEl.textContent = post.author;
+
+        const postContent = document.createElement('div');
+        postContent.className = "post-content";
+        postContent.style.display = 'flex';
+        postContent.style.flexDirection = 'column';
+        postContent.style.overflow = 'hidden';
+        postContent.style.borderRadius = '2px';
+
+        postContent.textContent = post.content;
+
+        postHeader.appendChild(authorEl);
+        postHeader.appendChild(postContent);
+
+        postDiv.appendChild(avatar);
+        postDiv.appendChild(postHeader);
+
+        if (Array.isArray(post.media)) {
+            const postImages = document.createElement('div');
+            postImages.className = 'post-images';
+
+            post.media.forEach((media) => {
+                if (media.type === 'image') {
+                    const img = document.createElement('img');
+                    img.src = media.url;
+                    img.style.maxWidth = '100%';
+                    postContent.appendChild(img);
+                } else if (media.type === 'video') {
+                    const video = document.createElement('video');
+                    video.src = media.url;
+                    video.controls = true;
+                    video.style.maxWidth = '100%';
+                    video.style.maxHeight = '300px';
+                    postContent.appendChild(video);
+                }
+            });
+            postContent.appendChild(postImages);
+        }
 
         postsContainer.appendChild(postDiv);
     });
 }
+
 
 getUserInfo();
