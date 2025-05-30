@@ -13,7 +13,9 @@ const username = searchParams.get("username") || 'No username...';
 let background = searchParams.has("bg") ? `#${searchParams.get("bg")}` : 'pink';
 let showPosts = searchParams.has("showPosts") ? searchParams.get("showPosts") == 'true' : true;
 
-
+console.log('username:', username);
+console.log('bg:', searchParams.get("bg"));
+console.log('showPosts:', showPosts);
 
 function addBadge(usernameSpan, badges) {
     badges.forEach((badge) => {
@@ -49,13 +51,9 @@ function displayCard(data) {
 
     followLink.href = `https://pikidiary.lol/@${data.username}`;
 
-    if (searchParams.get("bg") == 'userBackground') {
-        userContainer.style.background = data.background ? `url(${data.background})` : background;
-    }
-
-    else {
-        userContainer.style.background = data.banner ? `url(${data.banner})` : background;
-    }
+    if (searchParams.get("bg") == 'userBackground') userContainer.style.background = data.background ? `url(${data.background})` : background;
+    else if (searchParams.has("bg")) userContainer.style.background = background;
+    else userContainer.style.background = data.banner ? `url(${data.banner})` : background;
 
     userContainer.style.backgroundRepeat = 'no-repeat';
     userContainer.style.backgroundSize = 'cover';
