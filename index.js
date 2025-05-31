@@ -96,29 +96,42 @@ function displayPosts(data) {
 
         postContent.textContent = post.content;
 
+        const postEmotes = document.createElement('div');
+        postEmotes.className = "post-emotes";
+        postEmotes.style.display = 'flex';
+
         postHeader.appendChild(authorEl);
         postHeader.appendChild(postContent);
 
         postDiv.appendChild(avatar);
         postDiv.appendChild(postHeader);
 
+        postContent.appendChild(postEmotes);
+
         if (Array.isArray(post.media)) {
             const postImages = document.createElement('div');
             postImages.className = 'post-images';
 
             post.media.forEach((media) => {
-                if (media.type === 'image') {
+                if (media.type == 'image') {
                     const img = document.createElement('img');
                     img.src = media.url;
+                    img.className = "image";
                     img.style.maxWidth = '100%';
                     postContent.appendChild(img);
-                } else if (media.type === 'video') {
+                } else if (media.type == 'video') {
                     const video = document.createElement('video');
                     video.src = media.url;
                     video.controls = true;
                     video.style.maxWidth = '100%';
                     video.style.maxHeight = '300px';
                     postContent.appendChild(video);
+                }
+                else if (media.type == 'emote') {
+                    const img = document.createElement('img');
+                    img.src = `https://pikidiary.lol${media.url}`;
+                    img.style.maxWidth = '100%';
+                    postEmotes.appendChild(img);
                 }
             });
             postContent.appendChild(postImages);
