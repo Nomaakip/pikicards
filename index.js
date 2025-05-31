@@ -13,6 +13,8 @@ const username = searchParams.get("username") || 'No username...';
 let background = searchParams.has("bg") ? `#${searchParams.get("bg")}` : 'pink';
 let showPosts = searchParams.has("showPosts") ? searchParams.get("showPosts") == 'true' : true;
 let textColor = searchParams.has("textColor") ? `${searchParams.get("textColor")}` : 'white';
+let hideReplies = searchParams.has("hideReplies") ? searchParams.get("hideReplies") == 'true' : false;
+let hideMentions = searchParams.has("hideMentions") ? searchParams.get("hideMentions") == 'true' : false;
 
 function addBadge(usernameSpan, badges) {
     badges.forEach((badge) => {
@@ -49,7 +51,9 @@ function displayCard(data) {
 
     followLink.href = `https://pikidiary.lol/@${data.username}`;
 
-    if (searchParams.get("bg") == 'userBackground') userContainer.style.background = data.background ? `url(${data.background})` : background;
+    let userBackground = data.background.trim().startsWith("#") ? data.background : `url(${data.background})`;
+    
+    if (searchParams.get("bg") == 'userBackground') userContainer.style.background = data.background ? userBackground : background;
     else if (searchParams.has("bg")) userContainer.style.background = background;
     else userContainer.style.background = data.banner ? `url(${data.banner})` : background;
 
@@ -68,6 +72,9 @@ function displayPosts(data) {
     }
 
     data.posts.forEach((post) => {
+        if (hideReplies && post.isReply) return;
+        if (hideMentions && post.content.trim().startsWith("@")) return;
+
         const postLink = document.createElement('a');
         postLink.href = post.url;
         postLink.target = '_blank';
