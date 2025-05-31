@@ -70,6 +70,7 @@ function displayPosts(data) {
     data.posts.forEach((post) => {
         const postLink = document.createElement('a');
         postLink.href = post.url;
+        postLink.target = '_blank';
         postLink.style.textDecoration = 'none';
         postLink.style.color = 'inherit';
 
