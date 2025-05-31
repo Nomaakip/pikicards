@@ -12,10 +12,7 @@ const username = searchParams.get("username") || 'No username...';
 
 let background = searchParams.has("bg") ? `#${searchParams.get("bg")}` : 'pink';
 let showPosts = searchParams.has("showPosts") ? searchParams.get("showPosts") == 'true' : true;
-
-console.log('username:', username);
-console.log('bg:', searchParams.get("bg"));
-console.log('showPosts:', showPosts);
+let textColor = searchParams.has("textColor") ? `${searchParams.get("textColor")}` : 'white';
 
 function addBadge(usernameSpan, badges) {
     badges.forEach((badge) => {
@@ -47,6 +44,7 @@ async function getUserInfo() {
 
 function displayCard(data) {
     usernameText.textContent = data.username;
+    usernameText.style.color = textColor;
     userAvatar.src = data.pfp;
 
     followLink.href = `https://pikidiary.lol/@${data.username}`;
