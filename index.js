@@ -68,8 +68,13 @@ function displayPosts(data) {
         cardContainer.style.background = 'none';
         return;
     }
-    
+
     data.posts.forEach((post) => {
+        const postLink = document.createElement('a');
+        postLink.href = post.url;
+        postLink.style.textDecoration = 'none';
+        postLink.style.color = 'inherit';
+
         const postDiv = document.createElement('div');
         postDiv.classList.add('post');
 
@@ -121,7 +126,8 @@ function displayPosts(data) {
             postContent.appendChild(postImages);
         }
 
-        postsContainer.appendChild(postDiv);
+        postLink.appendChild(postDiv);
+        postsContainer.appendChild(postLink);
     });
 }
 
