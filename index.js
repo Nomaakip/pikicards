@@ -51,7 +51,9 @@ function displayCard(data) {
 
     followLink.href = `https://pikidiary.lol/@${data.username}`;
 
-    let userBackground = data.background.trim().startsWith("#") ? data.background : `url(${data.background})`;
+    let userBackground = (data.background?.trim() || '').startsWith("#") 
+    ? data.background 
+    : data.background ? `url(${data.background})` : background;
     
     if (searchParams.get("bg") == 'userBackground') userContainer.style.background = data.background ? userBackground : background;
     else if (searchParams.has("bg")) userContainer.style.background = background;
