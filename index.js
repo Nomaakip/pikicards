@@ -19,7 +19,7 @@ let hideMentions = searchParams.has("hideMentions") ? searchParams.get("hideMent
 function addBadge(usernameSpan, badges) {
     badges.forEach((badge) => {
         const img = document.createElement('img');
-        img.src = badge.iconUrl;
+        img.src = `https://corsproxy.io/?${badge.iconUrl}`;
         img.title = badge.name;
         img.alt = badge.name;
         img.style.height = '16px';
