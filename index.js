@@ -19,7 +19,7 @@ let hideMentions = searchParams.has("hideMentions") ? searchParams.get("hideMent
 function addBadge(usernameSpan, badges) {
     badges.forEach((badge) => {
         const img = document.createElement('img');
-        img.src = `https://corsproxy.io/?${badge.iconUrl}`;
+        img.src = `https://allowcors.nomaakip.workers.dev/?url=${badge.iconUrl}`;
         img.title = badge.name;
         img.alt = badge.name;
         img.style.height = '16px';
@@ -47,7 +47,7 @@ async function getUserInfo() {
 function displayCard(data) {
     usernameText.textContent = data.username;
     usernameText.style.color = textColor;
-    userAvatar.src = `https://corsproxy.io/?${data.pfp}`;
+    userAvatar.src = `https://allowcors.nomaakip.workers.dev/?url=${data.pfp}`;
 
     followLink.href = `https://pikidiary.lol/@${data.username}`;
 
@@ -138,7 +138,7 @@ function displayPosts(data) {
                     }
                     else if (media.type == 'emote') {
                         const img = document.createElement('img');
-                        img.src = `https://corsproxy.io/?https://pikidiary.lol${media.url}`;
+                        img.src = `https://allowcors.nomaakip.workers.dev/?url=https://pikidiary.lol${media.url}`;
                         img.style.maxWidth = '16px';
                         postEmotes.appendChild(img);
                     }
