@@ -57,7 +57,7 @@ function displayCard(data) {
     
     if (searchParams.get("bg") == 'userBackground') userContainer.style.background = data.background ? userBackground : background;
     else if (searchParams.has("bg")) userContainer.style.background = background;
-    else userContainer.style.background = data.banner ? `url(${data.banner})` : background;
+    else userContainer.style.background = data.banner ? `url(https://allowcors.nomaakip.workers.dev/?url=${data.banner})` : background;
 
     userContainer.style.backgroundRepeat = 'no-repeat';
     userContainer.style.backgroundSize = 'cover';
