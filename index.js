@@ -47,7 +47,7 @@ async function getUserInfo() {
 function displayCard(data) {
     usernameText.textContent = data.username;
     usernameText.style.color = textColor;
-    userAvatar.src = data.pfp;
+    userAvatar.src = `https://corsproxy.io/?${data.pfp}`;
 
     followLink.href = `https://pikidiary.lol/@${data.username}`;
 
@@ -138,7 +138,7 @@ function displayPosts(data) {
                     }
                     else if (media.type == 'emote') {
                         const img = document.createElement('img');
-                        img.src = `https://pikidiary.lol${media.url}`;
+                        img.src = `https://corsproxy.io/?https://pikidiary.lol${media.url}`;
                         img.style.maxWidth = '16px';
                         postEmotes.appendChild(img);
                     }
