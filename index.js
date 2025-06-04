@@ -17,6 +17,7 @@ let hideReplies = searchParams.has("hideReplies") ? searchParams.get("hideReplie
 let hideMentions = searchParams.has("hideMentions") ? searchParams.get("hideMentions") == 'true' : false;
 
 function addBadge(usernameSpan, badges) {
+    if (!badges) return;
     badges.forEach((badge) => {
         const img = document.createElement('img');
         img.src = `https://allowcors.nomaakip.workers.dev/?url=${badge.iconUrl}`;
