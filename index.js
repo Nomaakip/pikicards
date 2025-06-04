@@ -46,9 +46,9 @@ async function getUserInfo() {
 }
 
 function displayCard(data) {
-    usernameText.textContent = data.username;
+    usernameText.textContent = 'down!';
     usernameText.style.color = textColor;
-    userAvatar.src = `https://allowcors.nomaakip.workers.dev/?url=${data.pfp}`;
+    // userAvatar.src = `https://allowcors.nomaakip.workers.dev/?url=${data.pfp}`;
 
     followLink.href = `https://pikidiary.lol/@${data.username}`;
 
@@ -56,16 +56,19 @@ function displayCard(data) {
     ? data.background 
     : data.background ? `url(${data.background})` : background;
     
-    if (searchParams.get("bg") == 'userBackground') userContainer.style.background = data.background ? userBackground : background;
+   /* if (searchParams.get("bg") == 'userBackground') userContainer.style.background = data.background ? userBackground : background;
     else if (searchParams.has("bg")) userContainer.style.background = background;
     else userContainer.style.background = data.banner ? `url(https://allowcors.nomaakip.workers.dev/?url=${data.banner})` : background;
+    */
+
+   userContainer.style.background = 'black';
 
     userContainer.style.backgroundRepeat = 'no-repeat';
     userContainer.style.backgroundSize = 'cover';
     userContainer.style.backgroundPosition = 'center';
 
-    addBadge(usernameText, data.badges);
-    displayPosts(data);
+    // addBadge(usernameText, data.badges);
+   // displayPosts(data); 
 }
 
 function displayPosts(data) {
@@ -156,3 +159,4 @@ function displayPosts(data) {
 
 
 getUserInfo();
+
