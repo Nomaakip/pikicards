@@ -18,6 +18,24 @@
             color: white;
         }
 
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent !important;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+        }
+
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #595959;
+        }
+
+
         .avatar-small {
             box-sizing: border-box;
             border: 1px solid #CCC;
@@ -109,8 +127,8 @@
     <div id="cardContainer">
         <!-- user stuff!! -->
         <div id="userContainer">
-            <img src="https://corsproxy.io/?https://pikidiary.lol/uploads/avatars/resized-1746850786028.jpg" alt="pfp" class="avatar-small"
-                id="avatar">
+            <img src="https://corsproxy.io/?https://pikidiary.lol/uploads/avatars/resized-1746850786028.jpg" alt="pfp"
+                class="avatar-small" id="avatar">
             <div id="cardMain">
                 <b id="username-text"></b>
                 <div id="userInfo"></div>
