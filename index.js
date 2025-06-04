@@ -69,7 +69,7 @@ function displayCard(data) {
 
 function displayPosts(data) {
     if (!showPosts) {
-        cardContainer.style.background = 'none';
+        cardContainer.style.background = 'black';
         return;
     }
 
