@@ -50,7 +50,7 @@ function displayCard(data) {
     usernameText.style.color = textColor;
     // userAvatar.src = `https://allowcors.nomaakip.workers.dev/?url=${data.pfp}`;
 
-    followLink.href = `https://pikidiary.lol/@${data.username}`;
+    followLink.href = `https://pikidiary.lol/`;
 
     let userBackground = (data.background?.trim() || '').startsWith("#") 
     ? data.background 
