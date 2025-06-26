@@ -5,4 +5,4 @@ Example card: ```<iframe src="https://nomaakip.github.io/pikicards?username=hack
 docs and v2 soon?
 
 pikicards by @hacks.guide on PikiDiary 
-noma enslaved as helper please help me by sending 38$ to @squirrel on pikidariry 😢
+
