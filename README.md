@@ -5,5 +5,3 @@ Example card: ```<iframe src="https://nomaakip.github.io/pikicards?username=hack
 docs and v2 soon?
 
 pikicards by @hacks.guide on PikiDiary 
-
-she's trying to silecne helpm k,e
