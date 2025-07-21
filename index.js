@@ -105,7 +105,7 @@ function displayPosts(data) {
         postContent.style.overflow = 'hidden';
         postContent.style.borderRadius = '2px';
 
-        postContent.textContent = post.content.replace(/<img[^>]*class=["'][^"']*(?:emote)[^"']*["'][^>]*>/gi, '');;
+        postContent.textContent = post.content.replace(/<img[^>]*class=["'][^"']*(?:emote)[^"']*["'][^>]*>/gi, '').replace(/<a\b[^>]*>(.*?)<\/a>/gi, '$1');
 
         postHeader.appendChild(authorEl);
         postHeader.appendChild(postContent);
