@@ -11,6 +11,7 @@ const followLink = document.querySelector('#follow-link');
 const username = searchParams.get("username") || 'No username...';
 
 let background = searchParams.has("bg") ? `#${searchParams.get("bg")}` : 'pink';
+let cardBackground = searchParams.has("cardBg") ? `#${searchParams.get("cardBg")}` : 'black';
 let showPosts = searchParams.has("showPosts") ? searchParams.get("showPosts") == 'true' : true;
 let textColor = searchParams.has("textColor") ? `${searchParams.get("textColor")}` : 'white';
 let hideReplies = searchParams.has("hideReplies") ? searchParams.get("hideReplies") == 'true' : false;
@@ -59,6 +60,10 @@ function displayCard(data) {
     if (searchParams.get("bg") == 'userBackground') userContainer.style.background = data.background ? userBackground : background;
     else if (searchParams.has("bg")) userContainer.style.background = background;
     else userContainer.style.background = data.banner ? `url(https://allowcors.nomaakip.workers.dev/?url=${data.banner})` : background;
+
+    if (searchParams.get("cardBg") == 'userBackground') cardContainer.style.background = data.background ? userBackground : cardBackground;
+    else if (searchParams.get("cardBg") == 'userBanner') cardContainer.style.background = data.banner ? `url(https://allowcors.nomaakip.workers.dev/?url=${data.banner})` : cardBackground;
+    else cardContainer.style.background = cardBackground;
 
     userContainer.style.backgroundRepeat = 'no-repeat';
     userContainer.style.backgroundSize = 'cover';
