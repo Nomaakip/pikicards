@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!--html lang="en">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -47,11 +47,40 @@
             position: relative;
         }
 
-        #follow-button {
-            background: linear-gradient(180deg, rgba(254, 254, 209, 1), rgba(239, 197, 44, 1));
+        .button.button-yellow {
+            --button-bg: #ffca38;
+            border-color: #9b5d00;
+            color: #531;
+            text-shadow: 0 1px 0 #ffe8af, 1px 0 0 #ffe8af;
+        }
+
+        .button {
             height: 100%;
-            border: #EFCD56 1px solid;
-            border-radius: 2px;
+            border: solid 1px #646464;
+            outline: 0;
+            font-size: 13px;
+            padding: 4px;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-sizing: border-box;
+            --button-bg: #e7e7e7;
+            background: linear-gradient(180deg, rgba(255, 255, 255, .3) 0, rgba(255, 255, 255, 0) 45%), linear-gradient(180deg, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, .3) 100%), var(--button-bg);
+            background-blend-mode: normal, overlay, normal;
+            background-repeat: no-repeat;
+            border-radius: 3px;
+            color: #444;
+            text-shadow: 0 1px 0 #fff, 1px 0 0 #fff;
+            box-shadow: inset 0 2px 1px rgba(255, 255, 255, .7), inset 0 0 0 1px rgba(255, 255, 255, .7), inset 0 -1px 0 rgba(0, 0, 0, .2);
+            transition: box-shadow .2s steps(3);
+            --hover-shadow-color: rgba(128, 128, 128, 0.5);
+            cursor: pointer;
+        }
+
+        button:hover {
+            box-shadow: inset 0 5px 2px rgba(255, 255, 255, .5), inset 0 0 0 1px #fff, inset 0 -1px 0 rgba(0, 0, 0, .2), 0 0 0 2px var(--hover-shadow-color);
         }
 
         #follow-link {
@@ -123,22 +152,23 @@
     </style>
 </head>
 
-<body-->
-    <!--div id="cardContainer">
+<body>
+    <div id="cardContainer">
         <!-- user stuff!! -->
-        <!--div id="userContainer">
+        <div id="userContainer">
             <img src="https://corsproxy.io/?https://pikidiary.lol/uploads/avatars/resized-1746850786028.jpg" alt="pfp"
                 class="avatar-small" id="avatar">
             <div id="cardMain">
                 <b id="username-text"></b>
                 <div id="userInfo"></div>
-                <button id="follow-button"><a id="follow-link" target="_blank">Follow</a></button>
+                <button id="follow-button" class="button button-yellow"><a id="follow-link"
+                        target="_blank">Follow</a></button>
             </div>
         </div>
         <!-- posts!! -->
-        <!--div id="postsContainer"></div>
+        <div id="postsContainer"></div>
     </div>
     <script src="index.js"></script>
 </body>
 
-</html-->
+</html>
