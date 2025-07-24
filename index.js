@@ -62,10 +62,11 @@ function sanitizePostContent(html) {
     if (node.nodeType === Node.TEXT_NODE) return node.textContent;
 
     if (node.nodeType === Node.ELEMENT_NODE) {
+      const tagName = node.tagName.toLowerCase(); 
       const classList = Array.from(node.classList || []);
       const isAllowed = allowedClasses.some(cls => classList.includes(cls));
-
-      if (isAllowed) return node.outerHTML;
+      const allowedTags = ['strong', 'i', 'u', 'em'];
+      if (isAllowed || allowedTags.includes(tagName)) return node.outerHTML;
       else return escapeHTML(node.outerHTML);
       
     }
@@ -105,15 +106,15 @@ function displayCard(data) {
 
     let userBackground = (data.background?.trim() || '').startsWith("#") 
     ? data.background 
-    : data.background ? `url(${data.background})` : background;
+    : data.background ? `url(https://allowcors.nomaakip.workers.dev/?url=${data.background})` : background;
     
-    if (searchParams.get("bg") == 'userBackground') userContainer.style.background = data.background ? userBackground : background;
-    else if (searchParams.has("bg")) userContainer.style.background = background;
-    else userContainer.style.background = data.banner ? `url(https://allowcors.nomaakip.workers.dev/?url=${data.banner})` : background;
+    if (searchParams.get("bg") == 'userBackground') userContainer.style.background = data.background ? userBackground : `https://allowcors.nomaakip.workers.dev/?url=${background}`;
+    else if (searchParams.has("bg")) userContainer.style.background = `https://allowcors.nomaakip.workers.dev/?url=${background}`;
+    else userContainer.style.background = data.banner ? `url(https://allowcors.nomaakip.workers.dev/?url=${data.banner})` : `https://allowcors.nomaakip.workers.dev/?url=${background}`;
 
-    if (searchParams.get("cardBg") == 'userBackground') cardContainer.style.background = data.background ? userBackground : cardBackground;
-    else if (searchParams.get("cardBg") == 'userBanner') cardContainer.style.background = data.banner ? `url(https://allowcors.nomaakip.workers.dev/?url=${data.banner})` : cardBackground;
-    else cardContainer.style.background = cardBackground;
+    if (searchParams.get("cardBg") == 'userBackground') cardContainer.style.background = data.background ? userBackground : `https://allowcors.nomaakip.workers.dev/?url=${cardBackground}`;
+    else if (searchParams.get("cardBg") == 'userBanner') cardContainer.style.background = data.banner ? `url(https://allowcors.nomaakip.workers.dev/?url=${data.banner})` : `https://allowcors.nomaakip.workers.dev/?url=${cardBackground}`;
+    else cardContainer.style.background = `https://allowcors.nomaakip.workers.dev/?url=${cardBackground}`;
 
     userContainer.style.backgroundRepeat = 'no-repeat';
     userContainer.style.backgroundSize = 'cover';
