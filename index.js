@@ -1,6 +1,8 @@
 const paramsString = window.location.search;
 const searchParams = new URLSearchParams(paramsString);
 
+if (!paramsString) window.location.href = 'landing.html';
+
 const cardContainer = document.querySelector('#cardContainer');
 const userContainer = document.querySelector('#userContainer');
 const postsContainer = document.querySelector('#postsContainer');
@@ -14,8 +16,10 @@ let background = searchParams.has("bg") ? `#${searchParams.get("bg")}` : 'pink';
 let cardBackground = searchParams.has("cardBg") ? `#${searchParams.get("cardBg")}` : 'black';
 let showPosts = searchParams.has("showPosts") ? searchParams.get("showPosts") == 'true' : true;
 let textColor = searchParams.has("textColor") ? `${searchParams.get("textColor")}` : 'white';
+let postUsernameColor = searchParams.has("postUsernameColor") ? `${searchParams.get("postUsernameColor")}` : 'white';
 let hideReplies = searchParams.has("hideReplies") ? searchParams.get("hideReplies") == 'true' : false;
 let hideMentions = searchParams.has("hideMentions") ? searchParams.get("hideMentions") == 'true' : false;
+let postLimit = searchParams.has("postLimit") ? parseInt(searchParams.get("postLimit")) : 6;
 
 function addBadge(usernameSpan, badges) {
     if (!badges) return;
@@ -30,6 +34,52 @@ function addBadge(usernameSpan, badges) {
         usernameSpan.appendChild(img);
     });
 }
+
+function sanitizePostContent(html) {
+  const allowedClasses = ['nametag-wrapper', 'ping'];
+  const temp = document.createElement('div');
+  temp.innerHTML = html;
+
+  temp.querySelectorAll('img.emote').forEach(img => img.remove());
+
+  temp.querySelectorAll('.nametag-wrapper a, .ping').forEach(a => {
+    let targetPath = a.getAttribute('href') || a.textContent;
+    if (targetPath.startsWith('/')) targetPath = targetPath.slice(1);
+
+    a.setAttribute('href', `https://pikidiary.lol/${targetPath}`);
+    a.setAttribute('target', '_blank');
+  });
+
+  function escapeHTML(str) {
+    return str.replace(/&/g, '&amp;')
+              .replace(/</g, '&lt;')
+              .replace(/>/g, '&gt;')
+              .replace(/"/g, '&quot;')
+              .replace(/'/g, '&#39;');
+  }
+
+  function sanitizeNode(node) {
+    if (node.nodeType === Node.TEXT_NODE) return node.textContent;
+
+    if (node.nodeType === Node.ELEMENT_NODE) {
+      const classList = Array.from(node.classList || []);
+      const isAllowed = allowedClasses.some(cls => classList.includes(cls));
+
+      if (isAllowed) return node.outerHTML;
+      else return escapeHTML(node.outerHTML);
+      
+    }
+
+    return '';
+  }
+
+  let result = '';
+  for (const child of temp.childNodes) {
+    result += sanitizeNode(child);
+  }
+  return result;
+}
+
 
 async function getUserInfo() {
     try {
@@ -79,7 +129,7 @@ function displayPosts(data) {
         return;
     }
 
-    data.posts.forEach((post) => {
+    data.posts.slice(0, postLimit).forEach((post) => {
         if (hideReplies && post.isReply) return;
         if (hideMentions && post.content.trim().startsWith("@")) return;
 
@@ -102,6 +152,7 @@ function displayPosts(data) {
 
         const authorEl = document.createElement('b');
         authorEl.textContent = post.author;
+        authorEl.style.color = postUsernameColor;
 
         const postContent = document.createElement('div');
         postContent.className = "post-content";
@@ -110,13 +161,19 @@ function displayPosts(data) {
         postContent.style.overflow = 'hidden';
         postContent.style.borderRadius = '2px';
 
-        postContent.textContent = post.content.replace(/<img[^>]*class=["'][^"']*(?:emote)[^"']*["'][^>]*>/gi, '').replace(/<a\b[^>]*>(.*?)<\/a>/gi, '$1');
+        const postContentSpan = document.createElement('span');
+
+        postContentSpan.innerHTML = sanitizePostContent(post.content);
+        // postContent.textContent = post.content.replace(/<img[^>]*class=["'][^"']*\bemote\b[^"']*["'][^>]*>/gi, '');
+
 
         postHeader.appendChild(authorEl);
         postHeader.appendChild(postContent);
 
         postDiv.appendChild(avatar);
         postDiv.appendChild(postHeader);
+
+        postContent.appendChild(postContentSpan);
 
         if (Array.isArray(post.media)) {
             if (post.media.length > 0) {
