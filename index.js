@@ -36,51 +36,50 @@ function addBadge(usernameSpan, badges) {
 }
 
 function sanitizePostContent(html) {
-  const allowedClasses = ['nametag-wrapper', 'ping'];
-  const temp = document.createElement('div');
-  temp.innerHTML = html;
+    const allowedClasses = ['nametag-wrapper', 'ping'];
+    const temp = document.createElement('div');
+    temp.innerHTML = html;
 
-  temp.querySelectorAll('img.emote').forEach(img => img.remove());
+    temp.querySelectorAll('img.emote').forEach(img => img.remove());
 
-  temp.querySelectorAll('.nametag-wrapper a, .ping').forEach(a => {
-    let targetPath = a.getAttribute('href') || a.textContent;
-    if (targetPath.startsWith('/')) targetPath = targetPath.slice(1);
+    temp.querySelectorAll('.nametag-wrapper a, .ping').forEach(a => {
+        let targetPath = a.getAttribute('href') || a.textContent;
+        if (targetPath.startsWith('/')) targetPath = targetPath.slice(1);
 
-    a.setAttribute('href', `https://pikidiary.lol/${targetPath}`);
-    a.setAttribute('target', '_blank');
-  });
+        a.setAttribute('href', `https://pikidiary.lol/${targetPath}`);
+        a.setAttribute('target', '_blank');
+    });
 
-  function escapeHTML(str) {
-    return str.replace(/&/g, '&amp;')
-              .replace(/</g, '&lt;')
-              .replace(/>/g, '&gt;')
-              .replace(/"/g, '&quot;')
-              .replace(/'/g, '&#39;');
-  }
-
-  function sanitizeNode(node) {
-    if (node.nodeType === Node.TEXT_NODE) return node.textContent;
-
-    if (node.nodeType === Node.ELEMENT_NODE) {
-      const tagName = node.tagName.toLowerCase(); 
-      const classList = Array.from(node.classList || []);
-      const isAllowed = allowedClasses.some(cls => classList.includes(cls));
-      const allowedTags = ['strong', 'i', 'u', 'em'];
-      if (isAllowed || allowedTags.includes(tagName)) return node.outerHTML;
-      else return escapeHTML(node.outerHTML);
-      
+    function escapeHTML(str) {
+        return str.replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;');
     }
 
-    return '';
-  }
+    function sanitizeNode(node) {
+        if (node.nodeType === Node.TEXT_NODE) return node.textContent;
 
-  let result = '';
-  for (const child of temp.childNodes) {
-    result += sanitizeNode(child);
-  }
-  return result;
+        if (node.nodeType === Node.ELEMENT_NODE) {
+            const tagName = node.tagName.toLowerCase();
+            const classList = Array.from(node.classList || []);
+            const isAllowed = allowedClasses.some(cls => classList.includes(cls));
+            const allowedTags = ['strong', 'i', 'u', 'em'];
+            if (isAllowed || allowedTags.includes(tagName)) return node.outerHTML;
+            else return escapeHTML(node.outerHTML);
+
+        }
+
+        return '';
+    }
+
+    let result = '';
+    for (const child of temp.childNodes) {
+        result += sanitizeNode(child);
+    }
+    return result;
 }
-
 
 async function getUserInfo() {
     try {
@@ -104,10 +103,10 @@ function displayCard(data) {
 
     followLink.href = `https://pikidiary.lol/@${data.username}`;
 
-    let userBackground = (data.background?.trim() || '').startsWith("#") 
-    ? data.background 
-    : data.background ? `url(https://allowcors.nomaakip.workers.dev/?url=${data.background})` : background;
-    
+    let userBackground = (data.background?.trim() || '').startsWith("#")
+        ? data.background
+        : data.background ? `url(https://allowcors.nomaakip.workers.dev/?url=${data.background})` : background;
+
     if (searchParams.get("bg") == 'userBackground') userContainer.style.background = data.background ? userBackground : `https://allowcors.nomaakip.workers.dev/?url=${background}`;
     else if (searchParams.has("bg")) userContainer.style.background = background;
     else userContainer.style.background = data.banner ? `url(https://allowcors.nomaakip.workers.dev/?url=${data.banner})` : background;
@@ -134,12 +133,6 @@ function displayPosts(data) {
         if (hideReplies && post.isReply) return;
         if (hideMentions && post.content.trim().startsWith("@")) return;
 
-        const postLink = document.createElement('a');
-        postLink.href = post.url;
-        postLink.target = '_blank';
-        postLink.style.textDecoration = 'none';
-        postLink.style.color = 'inherit';
-
         const postDiv = document.createElement('div');
         postDiv.classList.add('post');
 
@@ -163,10 +156,7 @@ function displayPosts(data) {
         postContent.style.borderRadius = '2px';
 
         const postContentSpan = document.createElement('span');
-
         postContentSpan.innerHTML = sanitizePostContent(post.content);
-        // postContent.textContent = post.content.replace(/<img[^>]*class=["'][^"']*\bemote\b[^"']*["'][^>]*>/gi, '');
-
 
         postHeader.appendChild(authorEl);
         postHeader.appendChild(postContent);
@@ -212,10 +202,43 @@ function displayPosts(data) {
             }
         }
 
-        postLink.appendChild(postDiv);
-        postsContainer.appendChild(postLink);
+        const postActions = document.createElement('span');
+        postActions.className = 'post-actions';
+
+        const timeSpan = document.createElement('span');
+        timeSpan.style.lineHeight = '11px';
+        timeSpan.style.marginTop = '-1px';
+        timeSpan.textContent = post.createdAt || 'unknown time';
+
+        const likeSpan = document.createElement('span');
+        likeSpan.style.display = 'inline';
+        likeSpan.style.float = 'right';
+        likeSpan.style.fontSize = '11px';
+        likeSpan.innerHTML = `<a href="https://pikidiary.lol/posts/${post.id}" class="post-button" style="float:right;margin-right:10px;font-size:11px;text-decoration:none" target="_blank"><img src="https://allowcors.nomaakip.workers.dev/?url=https://pikidiary.lol/img/icons/like.png" alt="Like">&nbsp;<span class="like-count">${post.likes || 0}</span></a>`;
+        postActions.appendChild(timeSpan);
+        postActions.appendChild(likeSpan);
+
+        if (!post.isReply && post.comments !== undefined) {
+            const commentSpan = document.createElement('span');
+            commentSpan.style.float = 'right';
+            commentSpan.style.marginRight = '10px';
+            commentSpan.style.fontSize = '11px';
+            commentSpan.innerHTML = `<a href="https://pikidiary.lol/posts/${post.id}" class="post-button" style="text-decoration:none" target="_blank"><img src="https://allowcors.nomaakip.workers.dev/?url=https://pikidiary.lol/img/icons/comment.png" alt="Comment">&nbsp;${post.comments}</a>`;
+            postActions.appendChild(commentSpan);
+        }
+
+        if (post.isReply && post.replyInfo) {
+            const parentSpan = document.createElement('span');
+            parentSpan.style.float = 'right';
+            parentSpan.style.marginRight = '10px';
+            parentSpan.style.fontSize = '11px';
+            parentSpan.innerHTML = `<a href="https://pikidiary.lol/posts/${post.id}" class="post-button" style="text-decoration:none" target="_blank"><img src="https://allowcors.nomaakip.workers.dev/?url=https://pikidiary.lol/img/icons/parent.png" alt="Parent"></a>`;
+            postActions.appendChild(parentSpan);
+        }
+
+        postHeader.appendChild(postActions);
+        postsContainer.appendChild(postDiv);
     });
 }
-
 
 getUserInfo();
