@@ -83,7 +83,7 @@ function sanitizePostContent(html) {
 
 async function getUserInfo() {
     try {
-        const response = await fetch(`https://pikidiary-api.vercel.app?username=${username}`);
+        const response = await fetch(`https://pikiapi-pikicards.vercel.app?username=${username}`);
         if (!response.ok) {
             throw new Error(`Response status: ${response.status}`);
         }
@@ -214,7 +214,7 @@ function displayPosts(data) {
         likeSpan.style.display = 'inline';
         likeSpan.style.float = 'right';
         likeSpan.style.fontSize = '11px';
-        likeSpan.innerHTML = `<a href="https://pikidiary.lol/posts/${post.id}" class="post-button" style="float:right;margin-right:10px;font-size:11px;text-decoration:none" target="_blank"><img src="https://allowcors.nomaakip.workers.dev/?url=https://pikidiary.lol/img/icons/like.png" alt="Like">&nbsp;<span class="like-count">${post.likes || 0}</span></a>`;
+        likeSpan.innerHTML = `<a href="https://pikidiary.lol/posts/${post.id}" class="post-button" style="float:right;margin-right:10px;font-size:11px;text-decoration:none" target="_blank"><img src="https://allowcors.nomaakip.workers.dev/?url=https://monian.lol/img/icons/like.png" alt="Like">&nbsp;<span class="like-count">${post.likes || 0}</span></a>`;
         postActions.appendChild(timeSpan);
         postActions.appendChild(likeSpan);
 
@@ -223,7 +223,7 @@ function displayPosts(data) {
             commentSpan.style.float = 'right';
             commentSpan.style.marginRight = '10px';
             commentSpan.style.fontSize = '11px';
-            commentSpan.innerHTML = `<a href="https://pikidiary.lol/posts/${post.id}" class="post-button" style="text-decoration:none" target="_blank"><img src="https://allowcors.nomaakip.workers.dev/?url=https://pikidiary.lol/img/icons/comment.png" alt="Comment">&nbsp;${post.comments}</a>`;
+            commentSpan.innerHTML = `<a href="https://pikidiary.lol/posts/${post.id}" class="post-button" style="text-decoration:none" target="_blank"><img src="https://allowcors.nomaakip.workers.dev/?url=https://monian.lol/img/icons/comment.png" alt="Comment">&nbsp;${post.comments}</a>`;
             postActions.appendChild(commentSpan);
         }
 
@@ -232,7 +232,7 @@ function displayPosts(data) {
             parentSpan.style.float = 'right';
             parentSpan.style.marginRight = '10px';
             parentSpan.style.fontSize = '11px';
-            parentSpan.innerHTML = `<a href="https://pikidiary.lol/posts/${post.id}" class="post-button" style="text-decoration:none" target="_blank"><img src="https://allowcors.nomaakip.workers.dev/?url=https://pikidiary.lol/img/icons/parent.png" alt="Parent"></a>`;
+            parentSpan.innerHTML = `<a href="https://pikidiary.lol/posts/${post.id}" class="post-button" style="text-decoration:none" target="_blank"><img src="https://allowcors.nomaakip.workers.dev/?url=https://monian.lol/img/icons/parent.png" alt="Parent"></a>`;
             postActions.appendChild(parentSpan);
         }
 
@@ -242,5 +242,6 @@ function displayPosts(data) {
 }
 
 getUserInfo();
+
 
 
