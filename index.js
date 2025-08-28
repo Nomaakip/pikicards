@@ -83,7 +83,7 @@ function sanitizePostContent(html) {
 
 async function getUserInfo() {
     try {
-        const response = await fetch(`https://pikiapi-pikicards.vercel.app?username=${username}`);
+        const response = await fetch(`https://pikidiary-api.vercel.app?username=${username}`);
         if (!response.ok) {
             throw new Error(`Response status: ${response.status}`);
         }
@@ -242,4 +242,5 @@ function displayPosts(data) {
 }
 
 getUserInfo();
+
 
