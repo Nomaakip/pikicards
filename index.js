@@ -192,7 +192,7 @@ function displayPosts(data) {
                     }
                     else if (media.type == 'emote') {
                         const img = document.createElement('img');
-                        img.src = `https://allowcors.nomaakip.workers.dev/?url=https://pikidiary.lol${media.url}`;
+                        img.src = `https://allowcors.nomaakip.workers.dev/?url=https://monian.lol${media.url}`;
                         img.style.maxWidth = '16px';
                         postEmotes.appendChild(img);
                     }
@@ -242,6 +242,7 @@ function displayPosts(data) {
 }
 
 getUserInfo();
+
 
 
 
