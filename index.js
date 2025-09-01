@@ -65,7 +65,7 @@ function sanitizePostContent(html) {
             const tagName = node.tagName.toLowerCase();
             const classList = Array.from(node.classList || []);
             const isAllowed = allowedClasses.some(cls => classList.includes(cls));
-            const allowedTags = ['strong', 'i', 'u', 'em'];
+            const allowedTags = ['strong', 'i', 'u', 'em', 'a'];
             if (isAllowed || allowedTags.includes(tagName)) return node.outerHTML;
             else return escapeHTML(node.outerHTML);
 
@@ -242,6 +242,7 @@ function displayPosts(data) {
 }
 
 getUserInfo();
+
 
 
 
