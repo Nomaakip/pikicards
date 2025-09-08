@@ -1,4 +1,4 @@
-const paramsString = window.location.search;
+ const paramsString = window.location.search;
 const searchParams = new URLSearchParams(paramsString);
 
 if (!paramsString) window.location.href = 'landing.html';
@@ -242,3 +242,4 @@ function displayPosts(data) {
 }
 
 getUserInfo();
+
