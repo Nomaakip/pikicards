@@ -25,7 +25,7 @@ function addBadge(usernameSpan, badges) {
     if (!badges) return;
     badges.forEach((badge) => {
         const img = document.createElement('img');
-        img.src = `https://allowcors.nomaakip.workers.dev/?url=${badge.iconUrl}`;
+        img.src = `https://allowcors.nomaakip.xyz/?url=${badge.iconUrl}`;
         img.title = badge.name;
         img.alt = badge.name;
         img.style.height = '16px';
@@ -99,20 +99,20 @@ async function getUserInfo() {
 function displayCard(data) {
     usernameText.textContent = data.username;
     usernameText.style.color = textColor;
-    userAvatar.src = `https://allowcors.nomaakip.workers.dev/?url=${data.pfp}`;
+    userAvatar.src = `https://allowcors.nomaakip.xyz/?url=${data.pfp}`;
 
     followLink.href = `https://pikidiary.lol/@${data.username}`;
 
     let userBackground = (data.background?.trim() || '').startsWith("#")
         ? data.background
-        : data.background ? `url(https://allowcors.nomaakip.workers.dev/?url=${data.background})` : background;
+        : data.background ? `url(https://allowcors.nomaakip.xyz/?url=${data.background})` : background;
 
-    if (searchParams.get("bg") == 'userBackground') userContainer.style.background = data.background ? userBackground : `https://allowcors.nomaakip.workers.dev/?url=${background}`;
+    if (searchParams.get("bg") == 'userBackground') userContainer.style.background = data.background ? userBackground : `https://allowcors.nomaakip.xyz/?url=${background}`;
     else if (searchParams.has("bg")) userContainer.style.background = background;
-    else userContainer.style.background = data.banner ? `url(https://allowcors.nomaakip.workers.dev/?url=${data.banner})` : background;
+    else userContainer.style.background = data.banner ? `url(https://allowcors.nomaakip.xyz/?url=${data.banner})` : background;
 
     if (searchParams.get("cardBg") == 'userBackground') cardContainer.style.background = data.background ? userBackground : cardBackground;
-    else if (searchParams.get("cardBg") == 'userBanner') cardContainer.style.background = data.banner ? `url(https://allowcors.nomaakip.workers.dev/?url=${data.banner})` : cardBackground;
+    else if (searchParams.get("cardBg") == 'userBanner') cardContainer.style.background = data.banner ? `url(https://allowcors.nomaakip.xyz/?url=${data.banner})` : cardBackground;
     else cardContainer.style.background = cardBackground;
 
     userContainer.style.backgroundRepeat = 'no-repeat';
@@ -192,7 +192,7 @@ function displayPosts(data) {
                     }
                     else if (media.type == 'emote') {
                         const img = document.createElement('img');
-                        img.src = `https://allowcors.nomaakip.workers.dev/?url=https://pikidiary.lol${media.url}`;
+                        img.src = `https://allowcors.nomaakip.xyz/?url=https://pikidiary.lol${media.url}`;
                         img.style.maxWidth = '16px';
                         postEmotes.appendChild(img);
                     }
@@ -214,7 +214,7 @@ function displayPosts(data) {
         likeSpan.style.display = 'inline';
         likeSpan.style.float = 'right';
         likeSpan.style.fontSize = '11px';
-        likeSpan.innerHTML = `<a href="https://pikidiary.lol/posts/${post.id}" class="post-button" style="float:right;margin-right:10px;font-size:11px;text-decoration:none" target="_blank"><img src="https://allowcors.nomaakip.workers.dev/?url=https://pikidiary.lol/img/icons/like.png" alt="Like">&nbsp;<span class="like-count">${post.likes || 0}</span></a>`;
+        likeSpan.innerHTML = `<a href="https://pikidiary.lol/posts/${post.id}" class="post-button" style="float:right;margin-right:10px;font-size:11px;text-decoration:none" target="_blank"><img src="https://allowcors.nomaakip.xyz/?url=https://pikidiary.lol/img/icons/like.png" alt="Like">&nbsp;<span class="like-count">${post.likes || 0}</span></a>`;
         postActions.appendChild(timeSpan);
         postActions.appendChild(likeSpan);
 
@@ -223,7 +223,7 @@ function displayPosts(data) {
             commentSpan.style.float = 'right';
             commentSpan.style.marginRight = '10px';
             commentSpan.style.fontSize = '11px';
-            commentSpan.innerHTML = `<a href="https://pikidiary.lol/posts/${post.id}" class="post-button" style="text-decoration:none" target="_blank"><img src="https://allowcors.nomaakip.workers.dev/?url=https://pikidiary.lol/img/icons/comment.png" alt="Comment">&nbsp;${post.comments}</a>`;
+            commentSpan.innerHTML = `<a href="https://pikidiary.lol/posts/${post.id}" class="post-button" style="text-decoration:none" target="_blank"><img src="https://allowcors.nomaakip.xyz/?url=https://pikidiary.lol/img/icons/comment.png" alt="Comment">&nbsp;${post.comments}</a>`;
             postActions.appendChild(commentSpan);
         }
 
@@ -232,7 +232,7 @@ function displayPosts(data) {
             parentSpan.style.float = 'right';
             parentSpan.style.marginRight = '10px';
             parentSpan.style.fontSize = '11px';
-            parentSpan.innerHTML = `<a href="https://pikidiary.lol/posts/${post.id}" class="post-button" style="text-decoration:none" target="_blank"><img src="https://allowcors.nomaakip.workers.dev/?url=https://pikidiary.lol/img/icons/parent.png" alt="Parent"></a>`;
+            parentSpan.innerHTML = `<a href="https://pikidiary.lol/posts/${post.id}" class="post-button" style="text-decoration:none" target="_blank"><img src="https://allowcors.nomaakip.xyz/?url=https://pikidiary.lol/img/icons/parent.png" alt="Parent"></a>`;
             postActions.appendChild(parentSpan);
         }
 
@@ -242,4 +242,5 @@ function displayPosts(data) {
 }
 
 getUserInfo();
+
 
